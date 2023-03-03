@@ -1,0 +1,46 @@
+import random
+
+
+class RockPaperScissors:
+    choices = ['rock', 'paper', 'scissors']
+    player_wins = 0
+    computer_wins = 0
+    num_rounds = 0
+
+    def __init__(self, best_of: int):
+        self.best_of = best_of
+
+    def rounds(self):
+        while self.num_rounds < self.best_of:
+            user_input = input('pick between rock, paper or scissors: ')
+            computer_choice = random.choice(self.choices)
+            print(computer_choice)
+            if user_input == 'scissors' and computer_choice == 'paper':
+                print('Scissors cut paper. Player wins the round')
+                self.player_wins += 1
+            elif user_input == 'paper' and computer_choice == 'rock':
+                print('Paper covers rock. Player wins the round')
+                self.player_wins += 1
+            elif user_input == 'rock' and computer_choice == 'scissors':
+                print('Rock crushes scissors. Player wins the round')
+                self.player_wins += 1
+            elif user_input == computer_choice:
+                print('Its a draw')
+            else:
+                print(f'{computer_choice} trumps {user_input}. Computer wins the round')
+                self.computer_wins += 1
+            self.num_rounds += 1
+
+    def winner(self):
+        self.rounds()
+        if self.player_wins > self.computer_wins:
+            message = 'Player wins the game'
+        elif self.player_wins < self.computer_wins:
+            message = 'Computer wins the game'
+        else:
+            message = 'Its a draw'
+        return message
+
+
+sol = RockPaperScissors(3)
+print(sol.winner())
